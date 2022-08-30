@@ -12,7 +12,7 @@
 
 
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <script src="{{ asset('/js/app.js') }}" defer></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -39,14 +39,32 @@
 
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </div>
+                @endif
+
+                @if(session('success'))
+                <div class="alert alert-success">
+                    <i class="fa fa-check"></i>
+                        {{session('success')}}
+                </div>
+                @endif
                 {{ $slot }}
+
+
             </div>
         </div>
 
     </div>
 
     @stack('modals')
-
+    @isset($js)
+    {{ $js }}
+    @endif
     @livewireScripts
 </body>
 
