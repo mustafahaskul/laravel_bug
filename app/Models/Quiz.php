@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbonİ;
 class Quiz extends Model
 {
     use HasFactory;
     protected $fillable=['title','description','finished_at'];
 
-    public function questions(){
+    protected $dates=['finished_at'];
+
+    public function getFinishedAtAttribute($date)
+    { 
+        return $date ? Carbon::parse($date): null;
+    }
+
+    public function questions()
+    {
         return $this->hasMany('App\Models\Question');
     }
 }

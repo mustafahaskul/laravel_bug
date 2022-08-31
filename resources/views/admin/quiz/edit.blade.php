@@ -1,8 +1,8 @@
 <x-app-layout>
     <header>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
-<script src="{{asset('js/jquery.min.js')}}"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
+        <script src="{{asset('js/jquery.min.js')}}"></script>
     </header>
     <x-slot name="header">Quiz Güncelle</x-slot>
 
@@ -17,7 +17,17 @@
                 </div>
                 <div class="form-group">
                     <label>Quiz Açıklama</label>
-                    <textarea name="description"  class="form-control" rows="4">{{$quiz->description}}</textarea>
+                    <textarea name="description" class="form-control" rows="4">{{$quiz->description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Quiz Durumu</label>
+                    <select name="status" class="form-control">
+                        <option @if($quiz->questions_count<4) disabled @endif @if($quiz->status==='publish') selected @endif value="publish">
+                                Aktif
+                        </option>
+                        <option @if($quiz->status==='passive') selected @endif value="passive">Pasif</option>
+                        <option @if($quiz->status==='draft') selected @endif value="draft">Taslak</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input id="isFinished" @if($quiz->finished_at) checked @endif type="checkbox">
@@ -35,10 +45,10 @@
     </div>
     <x-slot name="js">
         <script>
-            $('#isFinished').change(function(){
-                if($('#isFinished').is(':checked')){
+            $('#isFinished').change(function() {
+                if ($('#isFinished').is(':checked')) {
                     $('#finishedInput').show();
-                }else{
+                } else {
                     $('#finishedInput').hide();
                 }
             })
