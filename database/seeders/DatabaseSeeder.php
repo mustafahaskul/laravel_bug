@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Answers;
 use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             QuizSeeder::class,
             QuestionSeeder::class,
+            AnswerSeeder::class,
+            ResultSeeder::class,
         ]);
     }
 }
