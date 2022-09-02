@@ -46,7 +46,14 @@
                             <td>
                                 @switch($quiz->status)
                                 @case('publish')
-                                <span style="color: black;" class="badge bg-success">Aktif</span>
+
+                                @if(!$quiz->finished_at)
+                                    <span style="color: black;" class="badge bg-success">Aktif</span>
+                                @elseif($quiz->finished_at > now())
+                                    <span style="color: black;" class="badge bg-success">Aktif</span>
+                                @else
+                                <span style="color: black;" class="badge bg-secondary text-white">Süresi Doldu</span>
+                                @endif
                                 @break
                                 @case('passive')
                                 <span style="color: black;" class="badge bg-danger">Pasif</span>
@@ -62,6 +69,9 @@
                                 </span>
                             </td>
                             <td>
+                                <a href="{{route('quizzes.details',$quiz->id)}}" class="btn btn-sm btn-secondary">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
                                 <a href="{{route('questions.index',$quiz->id)}}" class="btn btn-sm btn-warning">
                                     <i class="fa fa-question"></i>
                                 </a>

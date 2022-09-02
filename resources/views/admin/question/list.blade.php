@@ -11,7 +11,7 @@
             </h5>
             <h5 class="card-title">
 
-                <a href="{{route('quizzes.create')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>Quizlere Dön</a>
+                <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>Quizlere Dön</a>
             </h5>
 
             <table class="table table-bordered table-sm">
